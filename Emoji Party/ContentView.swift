@@ -8,12 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    var emojiSets = [
+        EmojiSet(name: "Fruits", emojis: ["🍌", "🍎", "🍓", "🍉", "🍍", "🥑"]),
+        EmojiSet(name: "Candy", emojis: ["🍫", "🍭", "🍬"])
+    ]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            List(emojiSets) { emojiSet in
+                NavigationLink {
+                    EmojiView(emojiSet: emojiSet)
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text(emojiSet.name)
+                            .font(.headline)
+                        Text(emojiSet.emojis.joined())
+                    }
+                }
+
+            }
+            .navigationTitle("Emoji Set")
         }
     }
 }
